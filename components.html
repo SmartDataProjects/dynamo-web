@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html>
+  <!-- Scripts -->
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/jquery.scrollex.min.js"></script>
+  <script src="assets/js/jquery.scrolly.min.js"></script>
+  <script src="assets/js/skel.min.js"></script>
+  <script src="assets/js/util.js"></script>
+  <script src="assets/js/main.js"></script>
+  <head>
+    <title>Components</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+  </head>
+  <body class="is-loading">
+    
+    <!-- Wrapper -->
+    <div id="wrapper">
+      
+      <!-- Header -->
+      <header id="header">
+	<img id="logoImg" src="images/dynamo.jpg" width="12%"/>
+	<!-- <a href="index.html" class="logo">Dynamo</a> -->
+      </header>
+      
+      <!-- Nav -->
+      <nav id="nav">
+	<ul class="links">
+	  <li><a href="index.html">Dynamo</a></li>
+	  <li><a href="introduction.html">Introdution</a></li>
+	  <li class="active"><a href="components.html">Components</a></li>
+	  <li><a href="news.html">News</a></li>
+	</ul>
+	<ul class="icons">
+	  <li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
+	</ul>
+      </nav>
+      
+      <!-- Main -->
+      <div id="main">
+	
+	<!-- Post -->
+	<section class="post">
+	  <header class="major">
+	    <h1 class="icon fa-cubes">Components</h1>
+	  </header>
+	  
+	  <!-- Text stuff -->
+	  <p>Dynamo consists of a few key components that work together in an asynchronous fashion to accomplish the task of managing the data on a potentially quite complex storage system. The components are designed in such a way that the system's reaction time is never limited by Dynamo itself but rather by the data operations that have to be executed on the storage system.</p>
+	  <p>All operations on the storage system go through database interactions which allow for reliable, fast and asynchronous modus of operandi.</p>
+	  
+	  <center>
+	    <a href="#" class="image"><img src="images/dynamo-design.png" width="80%" alt="" /></a>
+	  </center>
+
+	  <h2>Inventory</h2>
+	  <p>The inventory is implemented as a server application that maintains the full metadata of data distributed around all storage in memory. Some of the more complex and less frequently used metadata is swapped out and only read on demand. The availability of the metadata in memory minimizes the response times of the server. The server can be cloned and kept up to date with a fully optimized mechanism for data updates and safe access. Permanent storage is kept in a mysql database that is kept up to date as changes occur. The permanent storage can be kept in several severs and the main server can be dynamically switched in case of failures on the main server. Safe access to the data in memory is managed by the scheduler.</p>
+	  <h2>Scheduler</h2>
+	  <p> The scheduler manages access to the metadata in memory. It allows only one write process at a time and locks all instances of the metadata in memory during the execution. Read processes, a much more common operation are always allowed and can be concurrent. To avoid interference between standard scheduled processes and other access to the metadata (ex. user queries, or monitoring queries) it is a good idea to run them on separate servers.</p>
+	  <h2>Standard Processes</h2>
+	  <p>To keep sites within their quota and make sure data are distributed according to the defined policies a sequence of standard processes run on an hourly basis.</p>
+	  <h3>Detox</h3>
+	  <p>The detox process reviews each site and determines whether data needs to be removed. It is aware of all policies set and acts accordingly.</p>
+	  <h3>Dealer</h3>
+	  <p>The dealer process reviews information like upcoming data analysis tasks, popularity of the various datasets, site status, policies set <em>etc.</em> to make decisions on making new replicas for a given dataset. The dealer will try to optimize the usage of the available storage such that all policies are fulfilled and more popular data will have more replicas and less popular data will have less.</p>
+	  <h3>Enforcer</h3>
+	  <p>The enforcer is part of the dealer. Its task is to make sure that additional replicas are generated to fulfil policies. For example, if you decide to have two copies of the raw data instead of one additional copies will have to be made. This is a task for the enforcer.</p>
+	  <h3>Updater</h3>
+	  <p>The updater process is responsible to collect information about completed data transfers and deletions and update the metadata in memory. It is the main task that will require qrite access to the metadata.</p>
+	  <h2>Registry</h2>
+	  <p>The registry is a database with a set of tools to communicate with dynamo in a controlled fashion from the outside, but also for the scheduler to communicate with the File Operation Daemon (FOD). The registry will keep track of active transfers or active processes like locks or tape staging requests that the outside world wants to know about.</p>
+	  <h2>File Operation Daemon (FOD)</h2>
+	  <p>The file operation daemon is responsible to execute any deletion or transfer requests that is entered into the registry tables. It will mov the requests through a number of well defined states and once completed the updates will be propagated to the inventory.</p>
+	  <h2>Site Consistency Daemon</h2>
+	  <p>The site consistency daemon will on a regular basis independently review the status of the storage at each site. Files that should be there but are missing will be entered into the registry for transfer, files that are found but should not be there accroding to the inventory will be entered into the registry for deletion.</p>
+
+      </div>
+
+    </div>
+   
+  </body>
+</html>

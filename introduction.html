@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html>
+  <!-- Scripts -->
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/jquery.scrollex.min.js"></script>
+  <script src="assets/js/jquery.scrolly.min.js"></script>
+  <script src="assets/js/skel.min.js"></script>
+  <script src="assets/js/util.js"></script>
+  <script src="assets/js/main.js"></script>
+  <style>
+    img {
+    border-radius: 50%;
+    -webkit-transition: -webkit-transform 1.8s ease-in-out;
+    transition:         transform 1.8s ease-in-out;
+    }
+    img:hover {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+    }
+  </style>
+
+  <head>
+    <title>Intro</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+  </head>
+  <body class="is-loading">
+    
+    <!-- Wrapper -->
+    <div id="wrapper">
+      
+      <!-- Header -->
+      <header id="header">
+	<img id="logoImg" src="images/dynamo.jpg" width="12%"/>
+	<!-- <a href="index.html"><img id="logoImg" src="images/dynamo.jpg" width="12%"/></a> -->
+	<!-- <a href="index.html" class="logo">Dynamo</a> -->
+      </header>
+      
+      <!-- Nav -->
+      <nav id="nav">
+	<ul class="links">
+	  <li><a href="index.html">Dynamo</a></li>
+	  <li class="active"><a href="introduction.html">Introduction</a></li>
+	  <li><a href="components.html">Components</a></li>
+	  <li><a href="news.html">News</a></li>
+	</ul>
+	<ul class="icons">
+	  <li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
+	</ul>
+      </nav>
+      
+      <!-- Main -->
+      <div id="main">
+	
+	<!-- Post -->
+	<section class="post">
+	  <header class="major">
+	    <h1>Introduction to Dynamo</h1>
+	  </header>
+	  
+	  <!-- Text stuff -->
+	  <h2 class="icon fa-lightbulb-o"> Idea</h2>
+	  <p>Dynamo is an open source software product for data management. It can handle your data intelligently and coherently over few or many different storage sites, including disk and tape storage systems. The products puts an emphasis is on a lean infrastructure with few essential components and well defined REST APIs to interact with the outside world.</p>
+
+	  <h2 class="icon fa-bar-chart"> Prominent Features</h2>
+	  <h3 class="icon fa-"> Powerful Policy Language</h3>
+	  <p>Distributing data onto a storage system seems straight forward at first glance but with the storage and compute resources at the various storage sites being non-homogeneous and varying network connections the task of distributing data quickly becomes rather complex. Dynamo implements a powerful policy language that let's you define how you want the storage to be used, which data you want to replicate several times and which data you want to remove from disk.</p>
+	  <h3 class="icon fa-"> Fast and Scalable Inventory Implementation</h3>
+	  <p>To be able to get fast response on a vast storage system it is essential that access to the inventory is fast and efficient. Dynamo keeps the pertinent data in a carefully managed cache in memory to maximize response speeds. The system implements flexible subpartitions and can manage several independent partitions.</p>
+	  <h3 class="icon fa-"> Flexible use of Data Popularity</h3>
+	  <p>Data popularity is the driving force for data replication. If data is particularly popular it is advantageous to make several copies to optimize the access for users. Less popular data should have less copies or should even be deleted from disk, if a tape copy is available somewhere in the system. Replication is implemented in simple policies which are stored per partition in human readable language.</p>
+	  <h3 class="icon fa-"> External Site Consistency Module</h3>
+	  <p>In large storage systems with heterogeneous site infrastructure file loss, failures to deliver files to their destination and loss of metadata about a particular site content are a reality. Therefore Dynamo has an independent site consistency process which on a regular cycle tests the consistency of the site content with the inventory. Dark data get's cleared out and missing files are recovered from other disk copies or if needed from tape. The system is entirely automated and can be tuned to the specific application.</p>
+	  <h3 class="icon fa-"> Centralized Operations</h3>
+	  <p>Dynamo runs on a set of central servers. The inclusion of new sites requires a minimum interaction with the site administrators, no Dynamo specific software needs to be deployed, just the permissions and physical file infrastructure have to be created.</p>
+	  
+	  <hr />
+	</section>
+	
+      </div>
+      
+      <!-- Footer -->
+      <footer id="footer">
+      </footer>
+      
+      <!-- Copyright -->
+      <div id="copyright">
+	<ul><li>&copy; Dynamo</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+      </div>
+      
+    </div>
+    
+    
+  </body>
+</html>
